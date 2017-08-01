@@ -243,7 +243,9 @@
         "revoke": "Revoke",
         "save": "Save",
         "scopes": "Scopes",
-        "statistics": "Statistics"
+        "statistics": "Statistics",
+        "service": "Service",
+        "services": "Services"
     },
     "dynreg": {
         "client-id-placeholder": "Enter Client ID",
@@ -328,6 +330,9 @@
             "tooltip-restricted": "This scope can be used only by administrators. It is not available for dynamic registration.",
             "tooltip-default": "This scope is automatically assigned to newly registered clients."
         }
+    },
+    "service": {
+        "manage": "Manage Services"
     },
     "token": {
         "manage": "Manage Active Tokens",
@@ -430,6 +435,7 @@
 			"title": "Personal",
 			"approved_sites": "Manage Approved Sites",
 			"active_tokens": "Manage Active Tokens",
+            "services": "Manage Services",
 			"profile_information": "View Profile Information"
 		},
 		"developer": {
@@ -532,5 +538,23 @@
 			"notLoggedOut": "You have not been logged out of the identity server. You may close this browser or log in again.",
 			"loggedOut": "You have been logged out of the identity server."
 		}
-	}
+	},
+    "service": {
+        "service-table": {
+            "search": "Search...",
+            "no-service": "There are no services.",
+            "text": "Access tokens are usually short-lived and provide services with access to specific resources. ID Tokens are specialized access tokens to facilitate log on using OpenID Connect. Refresh tokens are usually long-lived and provide services with the ability to get new access tokens without end-user involvement.",
+            "no-matches": "There are no services that match your search criteria.",
+            "confirm-token": "Are you sure sure you would like to revoke this token?",
+            "confirm-service": "Are you sure sure you would like to revoke this service?",
+            "match": {
+                "description": "description",
+                "id": "id",
+                "logo": "logo",
+                "name": "name",
+                "scope": "scope",
+            },
+        },
+        
+    }
 }

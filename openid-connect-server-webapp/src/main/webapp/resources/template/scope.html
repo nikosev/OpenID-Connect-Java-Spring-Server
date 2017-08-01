@@ -226,3 +226,31 @@ style="cursor: default;" >
 %>
 
 </script>
+
+
+<script type="text/html" id="tmpl-scope-description">
+
+<span>Permissions: </span>
+<% 
+if (_.isEmpty(scopes)) {
+%>
+	<span class="badge badge-important"><i class="icon-warning-sign icon-white"></i> <span data-i18n="scope.scope-list.no-scopes">NO SCOPES</span></span>
+<%
+
+} else {
+var comma = ", ";
+_.each(scopes, function(s, index) {
+	var arrayLength = scopes.length;
+	var ss = systemScopes.getByValue(s);
+	if (ss) {
+%>
+	<span class="permissionScopes" style="cursor: default;"><%-ss.get('description')%><% if(index < arrayLength - 1){%><%-comma%><%} %></span>
+<%
+	}
+
+});
+
+}
+%>
+
+</script>
