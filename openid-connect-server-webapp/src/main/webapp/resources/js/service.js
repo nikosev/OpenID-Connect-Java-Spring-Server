@@ -460,6 +460,9 @@ var ServiceAccessTokenView = Backbone.View.extend({
         var decoded = jwt_decode(token);
 
         var issuedDate = decoded.iat;
+		
+		issuedDate = new Date(issuedDate*1000);
+        issuedDate = moment(issuedDate).calendar();
 
 		var json = {
 			token: this.model.toJSON(),
