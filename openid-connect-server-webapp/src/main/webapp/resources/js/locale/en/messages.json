@@ -331,9 +331,6 @@
             "tooltip-default": "This scope is automatically assigned to newly registered clients."
         }
     },
-    "service": {
-        "manage": "Manage Services"
-    },
     "token": {
         "manage": "Manage Active Tokens",
         "token-table": {
@@ -540,6 +537,7 @@
 		}
 	},
     "service": {
+        "manage": "Manage Services",
         "service-table": {
             "search": "Search...",
             "no-service": "There are no services.",
@@ -552,9 +550,8 @@
                 "id": "id",
                 "logo": "logo",
                 "name": "name",
-                "scope": "scope",
-            },
-        },
-        
+                "scope": "scope"
+            }
+        }
     }
 }
