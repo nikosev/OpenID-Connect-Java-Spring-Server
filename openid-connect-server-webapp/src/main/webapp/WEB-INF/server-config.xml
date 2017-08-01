@@ -42,7 +42,7 @@
  		<property name="topbarTitle" value="OpenID Connect Server" />
  		
 		<!-- This property sets the lifetime of registration access tokens, in seconds. Leave it unset (null) for no rotation. -->
-		<!-- <property name="regTokenLifeTime" value="172800" /> -->
+		<!--<property name="regTokenLifeTime" value="31536000" /> -->
 		
 		<!-- This property forces the issuer value to start with "https", recommended on production servers -->
 		<!-- <property name="forceHttps" value="true" /> -->
@@ -67,6 +67,15 @@
 		
 		<!-- This property turns on HEART compliance mode -->
 		<!-- <property name="heartMode" value="true" /> -->
+
+		<!-- This property sets the maxinum lifetime of refresh tokens, in seconds. -->
+		<property name="maxRefreshTokenLifeTime" value="31536000" />
+
+		<!-- This property sets the maxinum lifetime of access tokens, in seconds. -->
+		<property name="maxAccessTokenLifeTime" value="31536000" />
+
+		<!-- This property sets the maxinum lifetime of id tokens, in seconds. -->
+		<property name="maxIdTokenLifeTime" value="31536000" />
 
 	</bean>
 	

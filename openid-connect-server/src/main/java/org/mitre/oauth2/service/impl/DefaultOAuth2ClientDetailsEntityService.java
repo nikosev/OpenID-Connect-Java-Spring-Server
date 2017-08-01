@@ -128,6 +128,15 @@ public class DefaultOAuth2ClientDetailsEntityService implements ClientDetailsEnt
 
 		// make sure that clients with the "refresh_token" grant type have the "offline_access" scope, and vice versa
 		ensureRefreshTokenConsistency(client);
+		
+		// make sure that refresh tokens expire
+		ensureMaxRefreshTokenLifeTime(client);
+		
+		// make sure that access tokens expire
+		ensureMaxAccessTokenLifeTime(client);
+
+		// make sure that access tokens expire
+		ensureMaxIdTokenLifeTime(client);
 
 		// make sure we don't have both a JWKS and a JWKS URI
 		ensureKeyConsistency(client);
@@ -207,6 +216,66 @@ public class DefaultOAuth2ClientDetailsEntityService implements ClientDetailsEnt
 				|| client.getScope().contains(SystemScopeService.OFFLINE_ACCESS)) {
 			client.getScope().add(SystemScopeService.OFFLINE_ACCESS);
 			client.getAuthorizedGrantTypes().add("refresh_token");
+		}
+	}
+	
+	/**
+	 * Make sure that refresh token will timeout.
+	 * @param client
+	 */
+	private void ensureMaxRefreshTokenLifeTime(ClientDetailsEntity client) {
+		try {
+			//Check if the life time if more than the max
+			if (client.getRefreshTokenValiditySeconds() > Math.toIntExact(config.getMaxRefreshTokenLifeTime())) {
+				client.setRefreshTokenValiditySeconds(Math.toIntExact(config.getMaxRefreshTokenLifeTime()));
+			}
+            //Check if the life time is less than zero
+            if (client.getRefreshTokenValiditySeconds() < 1) {
+                client.setRefreshTokenValiditySeconds(1);
+            }
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Make sure that access token will timeout.
+	 * @param client
+	 */
+	private void ensureMaxAccessTokenLifeTime(ClientDetailsEntity client) {
+		try {
+			//Check if the life time if more than the max
+			if (client.getAccessTokenValiditySeconds() > Math.toIntExact(config.getMaxAccessTokenLifeTime())) {
+				client.setAccessTokenValiditySeconds(Math.toIntExact(config.getMaxAccessTokenLifeTime()));
+			}
+            //Check if the life time is less than zero
+            if (client.getAccessTokenValiditySeconds() < 1) {
+                client.setAccessTokenValiditySeconds(1);
+            }
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	/**
+	 * Make sure that id token will timeout.
+	 * @param client
+	 */
+	private void ensureMaxIdTokenLifeTime(ClientDetailsEntity client) {
+		try {
+			//Check if the life time if more than the max
+			if (client.getIdTokenValiditySeconds() > Math.toIntExact(config.getMaxIdTokenLifeTime())) {
+				client.setIdTokenValiditySeconds(Math.toIntExact(config.getMaxIdTokenLifeTime()));
+			}
+            //Check if the life time is less than zero
+            if (client.getIdTokenValiditySeconds() < 1) {
+                client.setIdTokenValiditySeconds(1);
+            }
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 
@@ -410,6 +479,15 @@ public class DefaultOAuth2ClientDetailsEntityService implements ClientDetailsEnt
 
 			// if the client is flagged to allow for refresh tokens, make sure it's got the right scope
 			ensureRefreshTokenConsistency(newClient);
+			
+			// make sure that refresh tokens expire
+			ensureMaxRefreshTokenLifeTime(newClient);
+			
+			// make sure that access tokens expire
+			ensureMaxAccessTokenLifeTime(newClient);
+
+			// make sure that id tokens expire
+			ensureMaxIdTokenLifeTime(newClient);
 
 			// make sure we don't have both a JWKS and a JWKS URI
 			ensureKeyConsistency(newClient);

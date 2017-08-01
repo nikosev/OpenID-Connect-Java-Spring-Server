@@ -59,6 +59,12 @@ public class ConfigurationPropertiesBean {
 
 	private Long rqpTokenLifeTime;
 
+	private Long maxRefreshTokenLifeTime;
+
+	private Long maxAccessTokenLifeTime;
+
+	private Long maxIdTokenLifeTime;
+
 	private boolean forceHttps = false; // by default we just log a warning for HTTPS deployment
 
 	private Locale locale = Locale.ENGLISH; // we default to the english translation
@@ -159,6 +165,48 @@ public class ConfigurationPropertiesBean {
 	 */
 	public void setRegTokenLifeTime(Long regTokenLifeTime) {
 		this.regTokenLifeTime = regTokenLifeTime;
+	}
+
+	/**
+	 * @return the maxRefreshTokenLifeTime
+	 */
+	public Long getMaxRefreshTokenLifeTime() {
+		return maxRefreshTokenLifeTime;
+	}
+
+	/**
+	 * @param maxRefreshTokenLifeTime the refresh token lifetime to set in seconds
+	 */
+	public void setMaxRefreshTokenLifeTime(Long maxRefreshTokenLifeTime) {
+		this.maxRefreshTokenLifeTime = maxRefreshTokenLifeTime;
+	}
+
+	/**
+	 * @return the maxAccessTokenLifeTime
+	 */
+	public Long getMaxAccessTokenLifeTime() {
+		return maxAccessTokenLifeTime;
+	}
+
+	/**
+	 * @param maxAccessTokenLifeTime the access token lifetime to set in seconds
+	 */
+	public void setMaxAccessTokenLifeTime(Long maxAccessTokenLifeTime) {
+		this.maxAccessTokenLifeTime = maxAccessTokenLifeTime;
+	}
+
+	/**
+	 * @return the maxIdTokenLifeTime
+	 */
+	public Long getMaxIdTokenLifeTime() {
+		return maxIdTokenLifeTime;
+	}
+
+	/**
+	 * @param maxIdTokenLifeTime the id token lifetime to set in seconds
+	 */
+	public void setMaxIdTokenLifeTime(Long maxIdTokenLifeTime) {
+		this.maxIdTokenLifeTime = maxIdTokenLifeTime;
 	}
 
 	/**

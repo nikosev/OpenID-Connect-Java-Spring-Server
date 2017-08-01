@@ -1021,7 +1021,21 @@ var ClientFormView = Backbone.View.extend({
 			accessTokenValiditySeconds = this.getFormTokenNumberValue($('#accessTokenValidityTime input[type=text]').val(), $('#accessTokenValidityTime select').val());
 		}
 
+		if (accessTokenValiditySeconds < 0 || accessTokenValiditySeconds > getMaxAccessTokenLifeTime()) {
+			// Display an alert with an error message
+			app.errorHandlerView.showErrorMessage($.t("client.client-form.error.timeout-bound"), $.t("client.client-form.error.access-token-duration"));
+			return false;
+
+		}
+
 		var idTokenValiditySeconds = this.getFormTokenNumberValue($('#idTokenValidityTime input[type=text]').val(), $('#idTokenValidityTime select').val());
+
+		if (idTokenValiditySeconds < 0 || idTokenValiditySeconds > getMaxIdTokenLifeTime()) {
+			// Display an alert with an error message
+			app.errorHandlerView.showErrorMessage($.t("client.client-form.error.timeout-bound"), $.t("client.client-form.error.id-token-duration"));
+			return false;
+
+		}
 
 		var deviceCodeValiditySeconds = this.getFormTokenNumberValue($('#deviceCodeValidityTime input[type=text]').val(), $('#deviceCodeValidityTime select').val());
 
@@ -1038,6 +1052,13 @@ var ClientFormView = Backbone.View.extend({
 
 			if (!$('disableRefreshTokenTimeout').is(':checked')) {
 				refreshTokenValiditySeconds = this.getFormTokenNumberValue($('#refreshTokenValidityTime input[type=text]').val(), $('#refreshTokenValidityTime select').val());
+			}
+
+			if (refreshTokenValiditySeconds < 0 || refreshTokenValiditySeconds > getMaxRefreshTokenLifeTime()) {
+				// Display an alert with an error message
+				app.errorHandlerView.showErrorMessage($.t("client.client-form.error.timeout-bound"), $.t("client.client-form.error.refresh-token-duration"));
+				return false;
+
 			}
 		}
 
@@ -1130,13 +1151,13 @@ var ClientFormView = Backbone.View.extend({
 			attrs["refreshTokenValiditySeconds"] = null;
 		}
 
-		if ($('#disableAccessTokenTimeout').is(':checked')) {
+		/* if ($('#disableAccessTokenTimeout').is(':checked')) {
 			attrs["accessTokenValiditySeconds"] = null;
-		}
+		}*/
 
-		if ($('#disableRefreshTokenTimeout').is(':checked')) {
+		/* if ($('#disableRefreshTokenTimeout').is(':checked')) {
 			attrs["refreshTokenValiditySeconds"] = null;
-		}
+		}*/
 
 		// set all empty strings to nulls
 		for ( var key in attrs) {
@@ -1193,7 +1214,10 @@ var ClientFormView = Backbone.View.extend({
 
 		var data = {
 			client: this.model.toJSON(),
-			heartMode: heartMode
+			heartMode: heartMode,
+			maxRefreshTokenValue: getMaxRefreshTokenLifeTime(),
+			maxAccessTokenValue: getMaxAccessTokenLifeTime(),
+			maxIdTokenValue: getMaxIdTokenLifeTime()
 		};
 		$(this.el).html(this.template(data));
 
@@ -1320,15 +1344,15 @@ var ClientFormView = Backbone.View.extend({
 			$("#refreshTokenValidityTime", this.$el).hide();
 		}
 
-		if (this.model.get("accessTokenValiditySeconds") == null) {
+		/* if (this.model.get("accessTokenValiditySeconds") == null) {
 			$("#access-token-timeout-time", this.$el).prop('disabled', true);
 			$("#access-token-timeout-unit", this.$el).prop('disabled', true);
-		}
+		} */
 
-		if (this.model.get("refreshTokenValiditySeconds") == null) {
+		/* if (this.model.get("refreshTokenValiditySeconds") == null) {
 			$("#refresh-token-timeout-time", this.$el).prop('disabled', true);
 			$("#refresh-token-timeout-unit", this.$el).prop('disabled', true);
-		}
+		} */
 
 		// toggle other dynamic fields
 		this.toggleClientCredentials();
