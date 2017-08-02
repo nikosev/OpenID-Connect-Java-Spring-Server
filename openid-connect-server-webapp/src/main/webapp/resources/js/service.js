@@ -634,6 +634,8 @@ var ServiceListView = Backbone.View.extend({
             }
         });
 
+        this.tokenCountLength = 0;
+
 		_.each(this.filteredModel.models, function(service, index) {
 			var view = new ServiceView({
 				model: service
