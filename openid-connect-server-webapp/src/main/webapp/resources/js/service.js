@@ -315,7 +315,8 @@ var ServiceRefreshTokenView = Backbone.View.extend({
 
 		var json = {
 			token: this.model.toJSON(),
-			formattedExpiration: expirationDate
+			formattedExpiration: expirationDate,
+			type: "refresh"
 		};
 
 		this.$el.html(this.template(json));
@@ -467,7 +468,8 @@ var ServiceAccessTokenView = Backbone.View.extend({
 		var json = {
 			token: this.model.toJSON(),
 			formattedExpiration: expirationDate,
-			formattedIssuedDate: issuedDate
+			formattedIssuedDate: issuedDate,
+			type: "access"
 		};
 
 		this.$el.html(this.template(json));
