@@ -639,7 +639,7 @@ var ServiceListView = Backbone.View.extend({
 			var refTok = _self.refreshTokensList.getByClientId(service.get('clientId'));
 			var accTok = _self.accessTokensList.getByClientId(service.get('clientId'));
 			if (refTok != null || accTok != null) {
-				this.tokenCountLength =+ 1;
+				this.tokenCountLength += 1;
 				view.parentView = this;
 				// var element = view.render().el;
 				var element = view.render().el;
