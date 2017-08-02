@@ -109,7 +109,7 @@
             <div class="row-fluid">
                 <div class="span12">
                     <div>
-                        <% if (token.refreshTokenId == null) { %>
+                        <% if (type == "refresh") { %>
                         <span title="token type" style="cursor: default;">Refresh Token</span>
                         <% } else { %>
                         <span title="token type" style="cursor: default;">Access Token</span>
@@ -154,7 +154,7 @@
             <div class="row-fluid">
                 <div class="span12">
                     <div>
-                        <% if (token.refreshTokenId == null) { %>
+                        <% if (type == "refresh") { %>
                         <span title="token type" style="cursor: default;">Refresh Token</span>
                         <% } else { %>
                         <span title="token type" style="cursor: default;">Access Token</span>
