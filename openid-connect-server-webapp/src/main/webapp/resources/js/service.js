@@ -361,6 +361,26 @@ var ServiceRefreshTokenView = Backbone.View.extend({
 
 		return false;
 	},
+	
+	copyToken: function(e) {
+        var _self = this;
+        var val = this.model.get("value");
+        var dummy = document.createElement("input");
+        document.body.appendChild(dummy);
+        dummy.setAttribute("id", "dummy_id");
+        $('#dummy_id').val(val);
+        try {
+            dummy.focus();
+            dummy.select();
+            document.execCommand("copy");
+        }
+        catch (e) {
+            alert('please press Ctrl/Cmd+C to copy');
+        }
+        document.body.removeChild(dummy);
+
+        return false;
+	},
 
 	toggleAccessTokens: function(e) {
         e.preventDefault();
