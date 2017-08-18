@@ -363,6 +363,11 @@ var ServiceRefreshTokenView = Backbone.View.extend({
 	},
 	
 	copyToken: function(e) {
+		//Get the current horizontal scroll position
+        var horizontalScroll = $(window).scrollLeft();
+        //Get the current vertical scroll position
+        var verticalScroll = $(window).scrollTop();
+		
         var _self = this;
         var val = this.model.get("value");
         var dummy = document.createElement("input");
@@ -378,6 +383,11 @@ var ServiceRefreshTokenView = Backbone.View.extend({
             alert('please press Ctrl/Cmd+C to copy');
         }
         document.body.removeChild(dummy);
+		
+		//Scroll back to the original horizontal bar scroll position
+        $(window).scrollLeft(horizontalScroll);
+        //Scroll back to the original vertical bar scroll position
+        $(window).scrollTop(verticalScroll);
 
         return false;
 	},
@@ -539,6 +549,11 @@ var ServiceAccessTokenView = Backbone.View.extend({
 	},
 
 	copyToken: function(e) {
+		//Get the current horizontal scroll position
+        var horizontalScroll = $(window).scrollLeft();
+        //Get the current vertical scroll position
+        var verticalScroll = $(window).scrollTop();
+		
         var _self = this;
         var val = this.model.get("value");
         var dummy = document.createElement("input");
@@ -554,9 +569,14 @@ var ServiceAccessTokenView = Backbone.View.extend({
             alert('please press Ctrl/Cmd+C to copy');
         }
         document.body.removeChild(dummy);
+		
+		//Scroll back to the original horizontal bar scroll position
+        $(window).scrollLeft(horizontalScroll);
+        //Scroll back to the original vertical bar scroll position
+        $(window).scrollTop(verticalScroll);
 
         return false;
-    },
+	},
 
 	close: function() {
 		$(this.el).unbind();
