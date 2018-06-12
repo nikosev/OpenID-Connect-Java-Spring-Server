@@ -1021,7 +1021,7 @@ var ClientFormView = Backbone.View.extend({
 			accessTokenValiditySeconds = this.getFormTokenNumberValue($('#accessTokenValidityTime input[type=text]').val(), $('#accessTokenValidityTime select').val());
 		}
 
-		if (accessTokenValiditySeconds < 0 || accessTokenValiditySeconds > getMaxAccessTokenLifeTime()) {
+		if (accessTokenValiditySeconds < 1 || accessTokenValiditySeconds > getMaxAccessTokenLifeTime() || accessTokenValiditySeconds == null) {
 			// Display an alert with an error message
 			app.errorHandlerView.showErrorMessage($.t("client.client-form.error.timeout-bound"), $.t("client.client-form.error.access-token-duration"));
 			return false;
@@ -1030,7 +1030,7 @@ var ClientFormView = Backbone.View.extend({
 
 		var idTokenValiditySeconds = this.getFormTokenNumberValue($('#idTokenValidityTime input[type=text]').val(), $('#idTokenValidityTime select').val());
 
-		if (idTokenValiditySeconds < 0 || idTokenValiditySeconds > getMaxIdTokenLifeTime()) {
+		if (idTokenValiditySeconds < 1 || idTokenValiditySeconds > getMaxIdTokenLifeTime() || idTokenValiditySeconds == null) {
 			// Display an alert with an error message
 			app.errorHandlerView.showErrorMessage($.t("client.client-form.error.timeout-bound"), $.t("client.client-form.error.id-token-duration"));
 			return false;
@@ -1054,7 +1054,7 @@ var ClientFormView = Backbone.View.extend({
 				refreshTokenValiditySeconds = this.getFormTokenNumberValue($('#refreshTokenValidityTime input[type=text]').val(), $('#refreshTokenValidityTime select').val());
 			}
 
-			if (refreshTokenValiditySeconds < 0 || refreshTokenValiditySeconds > getMaxRefreshTokenLifeTime()) {
+			if (refreshTokenValiditySeconds < 1 || refreshTokenValiditySeconds > getMaxRefreshTokenLifeTime() || getMaxRefreshTokenLifeTime == null) {
 				// Display an alert with an error message
 				app.errorHandlerView.showErrorMessage($.t("client.client-form.error.timeout-bound"), $.t("client.client-form.error.refresh-token-duration"));
 				return false;
@@ -1217,7 +1217,10 @@ var ClientFormView = Backbone.View.extend({
 			heartMode: heartMode,
 			maxRefreshTokenValue: getMaxRefreshTokenLifeTime(),
 			maxAccessTokenValue: getMaxAccessTokenLifeTime(),
-			maxIdTokenValue: getMaxIdTokenLifeTime()
+			maxIdTokenValue: getMaxIdTokenLifeTime(),
+			defaultRefreshTokenValue: getDefaultRefreshTokenLifeTime(),
+			defaultAccessTokenValue: getDefaultAccessTokenLifeTime(),
+			defaultIdTokenValue: getDefaultIdTokenLifeTime()
 		};
 		$(this.el).html(this.template(data));
 
@@ -1462,9 +1465,9 @@ ui.routes.push({
 					requireAuthTime: true,
 					defaultMaxAge: 60000,
 					scope: _.uniq(_.flatten(app.systemScopeList.defaultScopes().pluck("value"))),
-					accessTokenValiditySeconds: 3600,
-					refreshTokenValiditySeconds: 24 * 3600,
-					idTokenValiditySeconds: 300,
+					accessTokenValiditySeconds: getDefaultAccessTokenLifeTime(),
+					refreshTokenValiditySeconds: getDefaultRefreshTokenLifeTime(),
+					idTokenValiditySeconds: getDefaultIdTokenLifeTime(),
 					deviceCodeValiditySeconds: 30 * 60,
 					grantTypes: ["authorization_code"],
 					responseTypes: ["code"],
@@ -1484,8 +1487,9 @@ ui.routes.push({
 					requireAuthTime: true,
 					defaultMaxAge: 60000,
 					scope: _.uniq(_.flatten(app.systemScopeList.defaultScopes().pluck("value"))),
-					accessTokenValiditySeconds: 3600,
-					idTokenValiditySeconds: 600,
+					accessTokenValiditySeconds: getDefaultAccessTokenLifeTime(),
+					refreshTokenValiditySeconds: getDefaultRefreshTokenLifeTime(),
+					idTokenValiditySeconds: getDefaultIdTokenLifeTime(),
 					deviceCodeValiditySeconds: 30 * 60,
 					grantTypes: ["authorization_code"],
 					responseTypes: ["code"],

@@ -225,14 +225,10 @@ public class DefaultOAuth2ClientDetailsEntityService implements ClientDetailsEnt
 	 */
 	private void ensureMaxRefreshTokenLifeTime(ClientDetailsEntity client) {
 		try {
-			//Check if the life time if more than the max
-			if (client.getRefreshTokenValiditySeconds() > Math.toIntExact(config.getMaxRefreshTokenLifeTime())) {
-				client.setRefreshTokenValiditySeconds(Math.toIntExact(config.getMaxRefreshTokenLifeTime()));
+			//Check if the life time is valid value
+			if (!(client.getRefreshTokenValiditySeconds() > 0 && client.getRefreshTokenValiditySeconds() <= config.getMaxRefreshTokenLifeTime())) {
+				client.setRefreshTokenValiditySeconds(config.getDefaultRefreshTokenLifeTime());
 			}
-            //Check if the life time is less than zero
-            if (client.getRefreshTokenValiditySeconds() < 1) {
-                client.setRefreshTokenValiditySeconds(1);
-            }
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -245,14 +241,10 @@ public class DefaultOAuth2ClientDetailsEntityService implements ClientDetailsEnt
 	 */
 	private void ensureMaxAccessTokenLifeTime(ClientDetailsEntity client) {
 		try {
-			//Check if the life time if more than the max
-			if (client.getAccessTokenValiditySeconds() > Math.toIntExact(config.getMaxAccessTokenLifeTime())) {
-				client.setAccessTokenValiditySeconds(Math.toIntExact(config.getMaxAccessTokenLifeTime()));
+			//Check if the life time is valid value
+			if (!(client.getAccessTokenValiditySeconds() > 0 && client.getAccessTokenValiditySeconds() <= config.getMaxAccessTokenLifeTime())) {
+				client.setAccessTokenValiditySeconds(config.getDefaultAccessTokenLifeTime());
 			}
-            //Check if the life time is less than zero
-            if (client.getAccessTokenValiditySeconds() < 1) {
-                client.setAccessTokenValiditySeconds(1);
-            }
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -265,14 +257,10 @@ public class DefaultOAuth2ClientDetailsEntityService implements ClientDetailsEnt
 	 */
 	private void ensureMaxIdTokenLifeTime(ClientDetailsEntity client) {
 		try {
-			//Check if the life time if more than the max
-			if (client.getIdTokenValiditySeconds() > Math.toIntExact(config.getMaxIdTokenLifeTime())) {
-				client.setIdTokenValiditySeconds(Math.toIntExact(config.getMaxIdTokenLifeTime()));
+			//Check if the life time is valid value
+			if (!(client.getIdTokenValiditySeconds() > 0 && client.getIdTokenValiditySeconds() <= config.getMaxIdTokenLifeTime())) {
+				client.setIdTokenValiditySeconds(config.getDefaultIdTokenLifeTime());
 			}
-            //Check if the life time is less than zero
-            if (client.getIdTokenValiditySeconds() < 1) {
-                client.setIdTokenValiditySeconds(1);
-            }
 
 		} catch (Exception ex) {
 			ex.printStackTrace();

@@ -59,11 +59,17 @@ public class ConfigurationPropertiesBean {
 
 	private Long rqpTokenLifeTime;
 
-	private Long maxRefreshTokenLifeTime;
+	private int maxRefreshTokenLifeTime;
 
-	private Long maxAccessTokenLifeTime;
+	private int maxAccessTokenLifeTime;
 
-	private Long maxIdTokenLifeTime;
+	private int maxIdTokenLifeTime;
+
+	private int defaultRefreshTokenLifeTime;
+
+	private int defaultAccessTokenLifeTime;
+
+	private int defaultIdTokenLifeTime;
 
 	private boolean forceHttps = false; // by default we just log a warning for HTTPS deployment
 
@@ -170,43 +176,85 @@ public class ConfigurationPropertiesBean {
 	/**
 	 * @return the maxRefreshTokenLifeTime
 	 */
-	public Long getMaxRefreshTokenLifeTime() {
+	public int getMaxRefreshTokenLifeTime() {
 		return maxRefreshTokenLifeTime;
 	}
 
 	/**
 	 * @param maxRefreshTokenLifeTime the refresh token lifetime to set in seconds
 	 */
-	public void setMaxRefreshTokenLifeTime(Long maxRefreshTokenLifeTime) {
+	public void setMaxRefreshTokenLifeTime(int maxRefreshTokenLifeTime) {
 		this.maxRefreshTokenLifeTime = maxRefreshTokenLifeTime;
 	}
 
 	/**
 	 * @return the maxAccessTokenLifeTime
 	 */
-	public Long getMaxAccessTokenLifeTime() {
+	public int getMaxAccessTokenLifeTime() {
 		return maxAccessTokenLifeTime;
 	}
 
 	/**
 	 * @param maxAccessTokenLifeTime the access token lifetime to set in seconds
 	 */
-	public void setMaxAccessTokenLifeTime(Long maxAccessTokenLifeTime) {
+	public void setMaxAccessTokenLifeTime(int maxAccessTokenLifeTime) {
 		this.maxAccessTokenLifeTime = maxAccessTokenLifeTime;
 	}
 
 	/**
 	 * @return the maxIdTokenLifeTime
 	 */
-	public Long getMaxIdTokenLifeTime() {
+	public int getMaxIdTokenLifeTime() {
 		return maxIdTokenLifeTime;
 	}
 
 	/**
 	 * @param maxIdTokenLifeTime the id token lifetime to set in seconds
 	 */
-	public void setMaxIdTokenLifeTime(Long maxIdTokenLifeTime) {
+	public void setMaxIdTokenLifeTime(int maxIdTokenLifeTime) {
 		this.maxIdTokenLifeTime = maxIdTokenLifeTime;
+	}
+
+	/**
+	 * @return the defaultRefreshTokenLifeTime
+	 */
+	public int getDefaultRefreshTokenLifeTime() {
+		return defaultRefreshTokenLifeTime;
+	}
+
+	/**
+	 * @param defaultRefreshTokenLifeTime the refresh token lifetime to set in seconds
+	 */
+	public void setDefaultRefreshTokenLifeTime(int defaultRefreshTokenLifeTime) {
+		this.defaultRefreshTokenLifeTime = defaultRefreshTokenLifeTime;
+	}
+
+	/**
+	 * @return the defaultAccessTokenLifeTime
+	 */
+	public int getDefaultAccessTokenLifeTime() {
+		return defaultAccessTokenLifeTime;
+	}
+
+	/**
+	 * @param defaultAccessTokenLifeTime the access token lifetime to set in seconds
+	 */
+	public void setDefaultAccessTokenLifeTime(int defaultAccessTokenLifeTime) {
+		this.defaultAccessTokenLifeTime = defaultAccessTokenLifeTime;
+	}
+
+	/**
+	 * @return the defaultIdTokenLifeTime
+	 */
+	public int getDefaultIdTokenLifeTime() {
+		return defaultIdTokenLifeTime;
+	}
+
+	/**
+	 * @param defaultIdTokenLifeTime the id token lifetime to set in seconds
+	 */
+	public void setDefaultIdTokenLifeTime(int defaultIdTokenLifeTime) {
+		this.defaultIdTokenLifeTime = defaultIdTokenLifeTime;
 	}
 
 	/**
